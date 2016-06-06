@@ -8,6 +8,9 @@ $app->post('/', function ($request, $response, $args) {
     /** @var \Illuminate\Database\Capsule\Manager $db */
     $db = $this->db;
 
+    /** @var \Monolog\Logger $logger */
+    $logger = $this->logger;
+
     $requestBody = json_decode($request->getBody()->getContents());
 
     $message = json_decode($requestBody->Message);
@@ -22,5 +25,7 @@ $app->post('/', function ($request, $response, $args) {
 
         }
     }
+
+    $logger->debug(json_encode($requestBody));
 
 });
